@@ -1,0 +1,47 @@
+@model AIAgentMvc.Models.ChatViewModel
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>AI Chat</h2>
+
+<div class="mb-3">
+    <label class="form-label">Your message</label>
+    <textarea id="userMessage" class="form-control" rows="4"></textarea>
+    <div class="mt-2">
+        <button id="sendBtn" class="btn btn-primary">Send</button>
+    </div>
+</div>
+
+<div id="responseArea"></div>
+
+<script>
+    const sendBtn = document.getElementById('sendBtn');
+    const userMessageEl = document.getElementById('userMessage');
+    const responseArea = document.getElementById('responseArea');
+
+    sendBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const message = userMessageEl.value;
+        if (!message || !message.trim()) return;
+
+        sendBtn.disabled = true;
+        responseArea.innerHTML = '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
+
+        try {
+            const res = await fetch('/Chat/Send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await res.json();
+            responseArea.innerHTML = `<div class="card mt-4"><div class="card-header">Agent Response</div><div class="card-body"><p class="card-text">${(data.response || '').replace(/</g, '&lt;')}</p></div></div>`;
+        } catch (err) {
+            responseArea.innerHTML = `<div class="alert alert-danger mt-4">Error: ${err}</div>`;
+        } finally {
+            sendBtn.disabled = false;
+        }
+    });
+</script>

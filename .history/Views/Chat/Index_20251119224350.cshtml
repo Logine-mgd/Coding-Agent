@@ -1,0 +1,72 @@
+@model AIAgentMvc.Models.ChatViewModel
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>AI Chat</h2>
+
+<div class="mb-3">
+    <label class="form-label">Your message</label>
+    <textarea id="userMessage" class="form-control" rows="4"></textarea>
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label class="form-label">Auto-cycles</label>
+            <input id="cycles" type="number" class="form-control" value="0" min="0" style="width:100px" />
+        </div>
+        <div class="col">
+            <label class="form-label">&nbsp;</label>
+            <div><button id="sendBtn" class="btn btn-primary">Send</button></div>
+        </div>
+    </div>
+</div>
+
+<div id="responseArea"></div>
+
+<script>
+    const sendBtn = document.getElementById('sendBtn');
+    const userMessageEl = document.getElementById('userMessage');
+    const responseArea = document.getElementById('responseArea');
+    const cyclesEl = document.getElementById('cycles');
+
+    function appendCard(title, text) {
+        const card = document.createElement('div');
+        card.className = 'card mt-3';
+        card.innerHTML = `<div class="card-header">${title}</div><div class="card-body"><p class="card-text">${text.replace(/</g, '&lt;')}</p></div>`;
+        responseArea.appendChild(card);
+    }
+
+    sendBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const message = userMessageEl.value;
+        const cycles = parseInt(cyclesEl.value || '0', 10);
+        if (!message || !message.trim()) return;
+
+        sendBtn.disabled = true;
+        responseArea.innerHTML = '';
+        appendCard('You', message);
+
+        try {
+            const res = await fetch('/Chat/Send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message, cycles: cycles })
+            });
+
+            const data = await res.json();
+            if (data.responses && Array.isArray(data.responses)) {
+                data.responses.forEach((r, idx) => {
+                    appendCard('Agent (turn ' + (idx + 1) + ')', r || '(empty)');
+                });
+            } else if (data.response) {
+                appendCard('Agent', data.response);
+            } else {
+                appendCard('Agent', '(no response)');
+            }
+        } catch (err) {
+            appendCard('Error', String(err));
+        } finally {
+            sendBtn.disabled = false;
+        }
+    });
+</script>
