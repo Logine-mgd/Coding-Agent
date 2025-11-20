@@ -29,7 +29,9 @@
     <span class="ms-2">Thinking...</span>
     </div>
 
-<!-- highlight.js is loaded globally from the layout -->
+<!-- Include highlight.js for syntax highlighting and a small toolbar for copying -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
 <style>
     .code-toolbar { position: relative; }
@@ -39,7 +41,68 @@
     pre code { display: block; padding: 12px; overflow:auto; }
 </style>
 
-<!-- Theme moved into global CSS: /css/site.css -->
+<!-- Pink theme variables and overrides -->
+<style>
+    :root {
+        --pink-primary: #e91e63;
+        --pink-dark: #b0003a;
+        --pink-contrast: #ffffff;
+        --bg-soft: #fff4f8;
+    }
+
+    /* Page background */
+    body {
+        background-color: var(--bg-soft);
+    }
+
+    /* Primary button */
+    .btn-primary {
+        background-color: var(--pink-primary) !important;
+        border-color: var(--pink-primary) !important;
+        color: var(--pink-contrast) !important;
+    }
+    .btn-primary:hover {
+        background-color: var(--pink-dark) !important;
+        border-color: var(--pink-dark) !important;
+    }
+
+    /* Spinner color */
+    .spinner-border.text-primary {
+        color: var(--pink-primary) !important;
+    }
+
+    /* Card header */
+    .card-header {
+        background: linear-gradient(90deg, var(--pink-primary), var(--pink-dark));
+        color: var(--pink-contrast);
+        font-weight: 600;
+    }
+
+    /* Copy button style */
+    .copy-btn {
+        background: rgba(255,255,255,0.9);
+        border: 1px solid rgba(0,0,0,0.08);
+        color: var(--pink-dark);
+        padding: 3px 8px;
+        font-size: 12px;
+    }
+
+    /* Outline buttons (Show full) */
+    .btn-outline-secondary {
+        color: var(--pink-primary);
+        border-color: var(--pink-primary);
+    }
+    .btn-outline-secondary:hover {
+        background: var(--pink-primary);
+        color: var(--pink-contrast);
+    }
+
+    /* Code block subtle border */
+    pre {
+        border-left: 4px solid rgba(233,30,99,0.15);
+        background: #fff;
+    }
+</style>
 
 <script>
     const sendBtn = document.getElementById('sendBtn');
