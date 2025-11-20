@@ -26,3 +26,4 @@ C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\refint\AIAgentMvc.dll
 C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\AIAgentMvc.pdb
 C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\AIAgentMvc.genruntimeconfig.cache
 C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\ref\AIAgentMvc.dll
+C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\AIAgentMvc.sourcelink.json

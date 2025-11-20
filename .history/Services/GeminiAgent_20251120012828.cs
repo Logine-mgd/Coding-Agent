@@ -62,12 +62,6 @@ namespace AIAgentMvc.Services
 
                     using var request = new HttpRequestMessage(HttpMethod.Post, urlWithKey);
 
-                    // Build prompt wrapper (optional) to request concise replies or token limits
-                    var promptPrefix = _config["Gemini:PromptPrefix"];
-                    var effectiveMessage = string.IsNullOrWhiteSpace(promptPrefix)
-                        ? userMessage
-                        : (promptPrefix + "\n" + userMessage);
-
                     var payload = new
                     {
                         // v1beta/generateContent style: provide `contents` as list of messages
@@ -76,9 +70,12 @@ namespace AIAgentMvc.Services
                             new
                             {
                                 role = "user",
-                                parts = new[] { new { text = effectiveMessage } }
+                                parts = new[] { new { text = userMessage } }
                             }
-                        }
+                        },
+                        // generation parameters
+                        maxOutputTokens = maxOutputTokens,
+                        temperature = temperature
                     };
 
                     request.Content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");

@@ -1,0 +1,193 @@
+@model AIAgentMvc.Models.ChatViewModel
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>AI Chat</h2>
+
+<div class="mb-3">
+    <label class="form-label">Your message</label>
+    <textarea id="userMessage" class="form-control" rows="4"></textarea>
+    <div class="row mt-2">
+        <div class="col-auto">
+            <label class="form-label">Auto-cycles</label>
+            <input id="cycles" type="number" class="form-control" value="0" min="0" style="width:100px" />
+        </div>
+        <div class="col">
+            <label class="form-label">&nbsp;</label>
+            <div><button id="sendBtn" class="btn btn-primary">Send</button></div>
+        </div>
+    </div>
+</div>
+
+<div id="responseArea"></div>
+
+<!-- spinner shown while waiting for responses -->
+<div id="thinking" style="display:none;margin-top:10px">
+    <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+    <span class="ms-2">Thinking...</span>
+    </div>
+
+<!-- Include highlight.js for syntax highlighting and a small toolbar for copying -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+<style>
+    .code-toolbar { position: relative; }
+    .copy-btn {
+        position: absolute; right: 8px; top: 8px; z-index: 5;
+    }
+    pre code { display: block; padding: 12px; overflow:auto; }
+</style>
+
+<script>
+    const sendBtn = document.getElementById('sendBtn');
+    const userMessageEl = document.getElementById('userMessage');
+    const responseArea = document.getElementById('responseArea');
+    const cyclesEl = document.getElementById('cycles');
+    const thinkingEl = document.getElementById('thinking');
+
+    function appendCard(title, contentHtml) {
+        const card = document.createElement('div');
+        card.className = 'card mt-3';
+        const header = document.createElement('div');
+        header.className = 'card-header';
+        header.textContent = title;
+        const body = document.createElement('div');
+        body.className = 'card-body';
+        body.appendChild(contentHtml);
+        card.appendChild(header);
+        card.appendChild(body);
+        responseArea.appendChild(card);
+    }
+
+    function showThinking() { thinkingEl.style.display = 'block'; }
+    function hideThinking() { thinkingEl.style.display = 'none'; }
+
+    // copy code text and show a brief confirmation
+    function makeCopyButton(codeEl) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-sm btn-outline-secondary copy-btn';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(codeEl.textContent || '');
+                const old = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = old, 1500);
+            } catch (e) {
+                btn.textContent = 'Copy failed';
+                setTimeout(() => btn.textContent = 'Copy', 1500);
+            }
+        });
+        return btn;
+    }
+
+    sendBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const message = userMessageEl.value;
+        const cycles = parseInt(cyclesEl.value || '0', 10);
+        if (!message || !message.trim()) return;
+
+        sendBtn.disabled = true;
+        responseArea.innerHTML = '';
+        appendCard('You', (function(){ const p=document.createElement('p'); p.textContent=message; return p; })());
+        showThinking();
+
+        try {
+            const res = await fetch('/Chat/Send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: message, cycles: cycles })
+            });
+
+            const data = await res.json();
+            hideThinking();
+            if (data.responses && Array.isArray(data.responses)) {
+                data.responses.forEach((r, idx) => {
+                    const title = 'Agent (turn ' + (idx + 1) + ')';
+
+                    // If server returned structured response, show snippet + toggle
+                    if (r && typeof r === 'object' && ('snippet' in r)) {
+                        const container = document.createElement('div');
+
+                        const toolbar = document.createElement('div');
+                        toolbar.className = 'code-toolbar';
+
+                        const pre = document.createElement('pre');
+                        pre.style.whiteSpace = 'pre-wrap';
+                        const code = document.createElement('code');
+                        code.className = 'hljs';
+                        code.textContent = r.snippet || '';
+                        pre.appendChild(code);
+
+                        toolbar.appendChild(pre);
+
+                        // add copy button for snippet
+                        if (r.snippet) {
+                            const copyBtn = makeCopyButton(code);
+                            toolbar.appendChild(copyBtn);
+                        }
+
+                        container.appendChild(toolbar);
+
+                        if (r.hasMore) {
+                            const btn = document.createElement('button');
+                            btn.className = 'btn btn-sm btn-outline-secondary mt-2';
+                            btn.textContent = 'Show full';
+                            let expanded = false;
+                            const fullPre = document.createElement('pre');
+                            fullPre.style.whiteSpace = 'pre-wrap';
+                            fullPre.style.display = 'none';
+                            const fullCode = document.createElement('code');
+                            fullCode.className = 'hljs';
+                            fullCode.textContent = r.full || '';
+                            fullPre.appendChild(fullCode);
+
+                            // add copy button for full block
+                            const fullToolbar = document.createElement('div');
+                            fullToolbar.className = 'code-toolbar';
+                            fullToolbar.appendChild(fullPre);
+                            fullToolbar.appendChild(makeCopyButton(fullCode));
+
+                            btn.addEventListener('click', () => {
+                                expanded = !expanded;
+                                fullToolbar.style.display = expanded ? 'block' : 'none';
+                                btn.textContent = expanded ? 'Hide full' : 'Show full';
+                                if (expanded) hljs.highlightElement(fullCode);
+                            });
+
+                            container.appendChild(btn);
+                            container.appendChild(fullToolbar);
+                        }
+
+                        appendCard(title, container);
+                        // highlight snippet
+                        hljs.highlightElement(code);
+                    } else {
+                        const container = document.createElement('div');
+                        const p = document.createElement('p');
+                        p.textContent = (r || '(empty)');
+                        container.appendChild(p);
+                        appendCard(title, container);
+                    }
+                });
+            } else if (data.response) {
+                const p = document.createElement('p');
+                p.textContent = data.response;
+                appendCard('Agent', p);
+            } else {
+                const p = document.createElement('p');
+                p.textContent = '(no response)';
+                appendCard('Agent', p);
+            }
+        } catch (err) {
+            hideThinking();
+            appendCard('Error', (function(){ const p=document.createElement('p'); p.textContent=String(err); return p; })());
+        } finally {
+            sendBtn.disabled = false;
+            hideThinking();
+        }
+    });
+</script>
