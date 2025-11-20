@@ -211,6 +211,8 @@
                 }
             }
 
+            // clear the input only after we successfully rendered responses
+            try { userMessageEl.value = ''; userMessageEl.focus(); } catch (e) { }
             hideThinking();
         } catch (err) {
             hideThinking();

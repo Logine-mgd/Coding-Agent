@@ -1,0 +1,129 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = AIAgentMvc_20251119221129
+build_property.RootNamespace = AIAgentMvc_20251119221129
+build_property.ProjectDir = C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\.history\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\.history
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 7.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251119221023.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTExOTIyMTAyMy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251119221129.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTExOTIyMTEyOS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251119224350.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTExOTIyNDM1MC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251119230443.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTExOTIzMDQ0My5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120005746.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAwNTc0Ni5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120010143.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAxMDE0My5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120011234.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAxMTIzNC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120015349.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAxNTM0OS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120023219.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyMzIxOS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120024501.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyNDUwMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120024731.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyNDczMS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120024903.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyNDkwMy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120025322.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyNTMyMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120025449.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAyNTQ0OS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030255.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDI1NS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030304.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMwNC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030305.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMwNS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030308.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMwOC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030310.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMxMC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030313.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMxMy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Chat/Index_20251120030332.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleF8yMDI1MTEyMDAzMDMzMi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Shared/_Layout_20251119221012.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfMjAyNTExMTkyMjEwMTIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Shared/_Layout_20251119221129.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfMjAyNTExMTkyMjExMjkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Shared/_Layout_20251120024737.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfMjAyNTExMjAwMjQ3MzcuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/Shared/_Layout_20251120024856.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRfMjAyNTExMjAwMjQ4NTYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/_ViewStart_20251119221005.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydF8yMDI1MTExOTIyMTAwNS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Sally/Desktop/Coding Agent/Coding-Agent/.history/Views/_ViewStart_20251119221129.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydF8yMDI1MTExOTIyMTEyOS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

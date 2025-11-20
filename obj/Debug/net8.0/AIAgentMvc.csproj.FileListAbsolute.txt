@@ -28,3 +28,33 @@ C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\AIAgentMvc.genruntimeconfig.cache
 C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\ref\AIAgentMvc.dll
 C:\Users\DELL\Desktop\cop\obj\Debug\net8.0\AIAgentMvc.sourcelink.json
 C:\Users\DELL\Desktop\cop\bin\Debug\net8.0\AIAgentMvc.staticwebassets.runtime.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\appsettings.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.staticwebassets.runtime.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.staticwebassets.endpoints.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.exe
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.deps.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.runtimeconfig.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.dll
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\bin\Debug\net8.0\AIAgentMvc.pdb
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.AssemblyInfoInputs.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.AssemblyInfo.cs
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.csproj.CoreCompileInputs.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.RazorAssemblyInfo.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.RazorAssemblyInfo.cs
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.sourcelink.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\scopedcss\bundle\AIAgentMvc.styles.css
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.dll
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\refint\AIAgentMvc.dll
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.pdb
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\AIAgentMvc.genruntimeconfig.cache
+C:\Users\Sally\Desktop\Coding Agent\Coding-Agent\obj\Debug\net8.0\ref\AIAgentMvc.dll
