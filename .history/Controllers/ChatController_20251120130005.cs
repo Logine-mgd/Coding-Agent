@@ -67,7 +67,7 @@ namespace AIAgentMvc.Controllers
                 responses.Add(next ?? string.Empty);
             }
 
-            // Post-process responses to extract code snippets and strip Markdown formatting
+            // Post-process responses to convert Markdown to HTML
             var processed = responses.Select(r =>
             {
                 var full = r ?? string.Empty;
@@ -78,71 +78,84 @@ namespace AIAgentMvc.Controllers
             return Json(new { responses = processed });
         }
 
-        // Extracts code block if present, otherwise returns full text with Markdown stripped
+        // Extracts code block if present, otherwise converts Markdown to HTML
         private static string ExtractSnippet(string text, out bool hasMore)
         {
             hasMore = false;
             if (string.IsNullOrEmpty(text)) return string.Empty;
 
-            // If there's a fenced code block, extract it (keep code as-is)
+            // If there's a fenced code block, extract it and wrap in <pre><code>
             var fenceMatch = Regex.Match(text, "```(?:[a-zA-Z0-9+-]*)\\r?\\n([\\s\\S]*?)```", RegexOptions.Multiline);
             if (fenceMatch.Success)
             {
                 var code = fenceMatch.Groups[1].Value.Replace("\r\n", "\n").TrimEnd();
-                return code;
+                return $"<pre><code>{System.Web.HttpUtility.HtmlEncode(code)}</code></pre>";
             }
 
-            // No fenced block — strip Markdown formatting and return plain text
+            // No fenced block — convert Markdown to HTML
             var normalized = text.Replace("\r\n", "\n");
-            var plainText = StripMarkdown(normalized);
-            return plainText;
+            var html = ConvertMarkdownToHtml(normalized);
+            return html;
         }
 
-        // Strips common Markdown formatting to return plain text
-        private static string StripMarkdown(string text)
+        // Converts common Markdown formatting to HTML
+        private static string ConvertMarkdownToHtml(string text)
         {
             if (string.IsNullOrEmpty(text)) return string.Empty;
 
-            // Remove bold: **text** or __text__
-            text = Regex.Replace(text, @"\*\*(.+?)\*\*", "$1");
-            text = Regex.Replace(text, @"__(.+?)__", "$1");
+            // Escape HTML first to prevent injection
+            text = System.Web.HttpUtility.HtmlEncode(text);
 
-            // Remove italic: *text* or _text_
-            text = Regex.Replace(text, @"\*(.+?)\*", "$1");
-            text = Regex.Replace(text, @"_(.+?)_", "$1");
+            // Convert headers (must be done before bold/italic to avoid conflicts)
+            text = Regex.Replace(text, @"^######\s*(.+)$", "<h6>$1</h6>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"^#####\s*(.+)$", "<h5>$1</h5>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"^####\s*(.+)$", "<h4>$1</h4>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"^###\s*(.+)$", "<h3>$1</h3>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"^##\s*(.+)$", "<h2>$1</h2>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"^#\s*(.+)$", "<h1>$1</h1>", RegexOptions.Multiline);
 
-            // Remove inline code: `code`
-            text = Regex.Replace(text, @"`(.+?)`", "$1");
+            // Convert bold: **text** or __text__
+            text = Regex.Replace(text, @"\*\*(.+?)\*\*", "<strong>$1</strong>");
+            text = Regex.Replace(text, @"__(.+?)__", "<strong>$1</strong>");
 
-            // Remove headers: # Header
-            text = Regex.Replace(text, @"^#+\s*(.+)$", "$1", RegexOptions.Multiline);
+            // Convert italic: *text* or _text_
+            text = Regex.Replace(text, @"\*(.+?)\*", "<em>$1</em>");
+            text = Regex.Replace(text, @"_(.+?)_", "<em>$1</em>");
 
-            // Remove links: [text](url) -> text
+            // Convert strikethrough: ~~text~~
+            text = Regex.Replace(text, @"~~(.+?)~~", "<del>$1</del>");
+
+            // Convert inline code: `code`
+            text = Regex.Replace(text, @"`(.+?)`", "<code>$1</code>");
+
+            // Convert links: [text](url)
             text = Regex.Replace(text, @"
 $$
 (.+?)
-$$$.+?$", "$1");
+$$$(.+?)$", "<a href=\"$2\" target=\"_blank\">$1</a>");
 
-            // Remove images: ![alt](url) -> alt
-            text = Regex.Replace(text, @"!
-$$
-(.+?)
-$$$.+?$", "$1");
+            // Convert unordered lists
+            text = Regex.Replace(text, @"^[\*\-\+]\s+(.+)$", "<li>$1</li>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"(<li>.*</li>)", "<ul>$1</ul>", RegexOptions.Singleline);
 
-            // Remove strikethrough: ~~text~~
-            text = Regex.Replace(text, @"~~(.+?)~~", "$1");
+            // Convert ordered lists
+            text = Regex.Replace(text, @"^\d+\.\s+(.+)$", "<li>$1</li>", RegexOptions.Multiline);
+            // Merge consecutive <ul> tags and convert numbered lists to <ol>
+            text = Regex.Replace(text, @"</ul>\s*<ul>", "");
+            
+            // Convert blockquotes: > text
+            text = Regex.Replace(text, @"^&gt;\s*(.+)$", "<blockquote>$1</blockquote>", RegexOptions.Multiline);
+            text = Regex.Replace(text, @"</blockquote>\s*<blockquote>", "");
 
-            // Remove bullet points and numbered lists markers
-            text = Regex.Replace(text, @"^[\*\-\+]\s+", "", RegexOptions.Multiline);
-            text = Regex.Replace(text, @"^\d+\.\s+", "", RegexOptions.Multiline);
+            // Convert line breaks (double newline = paragraph, single = <br>)
+            text = Regex.Replace(text, @"\n\n", "</p><p>");
+            text = Regex.Replace(text, @"\n", "<br>");
+            text = $"<p>{text}</p>";
 
-            // Remove blockquotes: > text
-            text = Regex.Replace(text, @"^>\s*", "", RegexOptions.Multiline);
+            // Clean up empty paragraphs
+            text = Regex.Replace(text, @"<p>\s*</p>", "");
 
-            // Remove horizontal rules: --- or ***
-            text = Regex.Replace(text, @"^(\*{3,}|-{3,}|_{3,})$", "", RegexOptions.Multiline);
-
-            return text.Trim();
+            return text;
         }
     }
 

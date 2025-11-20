@@ -67,7 +67,7 @@ namespace AIAgentMvc.Controllers
                 responses.Add(next ?? string.Empty);
             }
 
-            // Post-process responses to extract code snippets and strip Markdown formatting
+            // Post-process responses to extract code snippets - NO TRUNCATION
             var processed = responses.Select(r =>
             {
                 var full = r ?? string.Empty;
@@ -78,13 +78,13 @@ namespace AIAgentMvc.Controllers
             return Json(new { responses = processed });
         }
 
-        // Extracts code block if present, otherwise returns full text with Markdown stripped
+        // Extracts code block if present, otherwise returns full text. NO TRUNCATION.
         private static string ExtractSnippet(string text, out bool hasMore)
         {
             hasMore = false;
             if (string.IsNullOrEmpty(text)) return string.Empty;
 
-            // If there's a fenced code block, extract it (keep code as-is)
+            // If there's a fenced code block, extract it
             var fenceMatch = Regex.Match(text, "```(?:[a-zA-Z0-9+-]*)\\r?\\n([\\s\\S]*?)```", RegexOptions.Multiline);
             if (fenceMatch.Success)
             {
@@ -92,57 +92,9 @@ namespace AIAgentMvc.Controllers
                 return code;
             }
 
-            // No fenced block — strip Markdown formatting and return plain text
+            // No fenced block — return full text with normalized line endings
             var normalized = text.Replace("\r\n", "\n");
-            var plainText = StripMarkdown(normalized);
-            return plainText;
-        }
-
-        // Strips common Markdown formatting to return plain text
-        private static string StripMarkdown(string text)
-        {
-            if (string.IsNullOrEmpty(text)) return string.Empty;
-
-            // Remove bold: **text** or __text__
-            text = Regex.Replace(text, @"\*\*(.+?)\*\*", "$1");
-            text = Regex.Replace(text, @"__(.+?)__", "$1");
-
-            // Remove italic: *text* or _text_
-            text = Regex.Replace(text, @"\*(.+?)\*", "$1");
-            text = Regex.Replace(text, @"_(.+?)_", "$1");
-
-            // Remove inline code: `code`
-            text = Regex.Replace(text, @"`(.+?)`", "$1");
-
-            // Remove headers: # Header
-            text = Regex.Replace(text, @"^#+\s*(.+)$", "$1", RegexOptions.Multiline);
-
-            // Remove links: [text](url) -> text
-            text = Regex.Replace(text, @"
-$$
-(.+?)
-$$$.+?$", "$1");
-
-            // Remove images: ![alt](url) -> alt
-            text = Regex.Replace(text, @"!
-$$
-(.+?)
-$$$.+?$", "$1");
-
-            // Remove strikethrough: ~~text~~
-            text = Regex.Replace(text, @"~~(.+?)~~", "$1");
-
-            // Remove bullet points and numbered lists markers
-            text = Regex.Replace(text, @"^[\*\-\+]\s+", "", RegexOptions.Multiline);
-            text = Regex.Replace(text, @"^\d+\.\s+", "", RegexOptions.Multiline);
-
-            // Remove blockquotes: > text
-            text = Regex.Replace(text, @"^>\s*", "", RegexOptions.Multiline);
-
-            // Remove horizontal rules: --- or ***
-            text = Regex.Replace(text, @"^(\*{3,}|-{3,}|_{3,})$", "", RegexOptions.Multiline);
-
-            return text.Trim();
+            return normalized;
         }
     }
 
