@@ -70,18 +70,12 @@
         card.appendChild(body);
         responseArea.appendChild(card);
 
-        // Auto-scroll response area and whole page to show the newly appended card
+        // Auto-scroll response area to show the newly appended card
         try {
             // scroll the response container so the new card is visible
             card.scrollIntoView({ behavior: 'smooth', block: 'end' });
             // also ensure the container is scrolled to bottom (fallback)
             responseArea.scrollTop = responseArea.scrollHeight;
-            // scroll the whole window to bottom so the input (below responses) is visible
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-            // autofocus the input so user can type the next message quickly
-            if (typeof userMessageEl !== 'undefined' && userMessageEl && userMessageEl.focus) {
-                try { userMessageEl.focus(); } catch { }
-            }
         } catch (e) {
             // ignore
         }
